@@ -1,18 +1,17 @@
 <template>
-    <h1>List...  {{ user }} </h1>
-    <h1>List...  {{ movies }} </h1>
     <div class="movies-list">
             <div class="movie" v-for="movie in movies" :key="movie.imdbID">
-               <router-link :to="'/movie/' + movie.Imdb_id" class="movie-link">
+               <div class="movie-link">
                 <div class="product-image">
-                <img :src="movie.Poster" alt="">
-                <div class="type">{{ movie.Type }}</div>
+                <img :src="require('@/images/avengers.png')" alt="">
+                <div class="type">{{ movie.Name }}</div>
+                <button  v-on:click="watched(movie)" class="watched">Mark as watched!</button>
                 </div>
                 <div class="detail">
-                    <div class="year">{{ movie.Year }}</div>
+                    <div class="year">{{ movie.Release_Date }}</div>
                     <h3>{{ movie.Title }}</h3>
                 </div>
-               </router-link>
+            </div>
             </div>
          </div>
 </template>
@@ -36,11 +35,20 @@ export default{
 
    async created(){ 
 
-        const response =  await axios.get("Shows/2",);
-        //console.log(response.data)
+  //headers for requests to be set globally in the axios file
+    var headers = {
+    headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
+    }
+        const response =  await axios.get("Shows/2",headers)        
         if(response.status == '200'){
                 this.movies = response.data ;
             } 
+    },
+
+    methods:{
+    watched: function(movie){
+        console.log(movie)
+    }
     }
 
 }
@@ -80,6 +88,16 @@ export default{
                         color: #FFF;
                         bottom: 16px;
                         left: 0px;
+                        text-transform: capitalize;
+                    }
+
+                    .watched{
+                        position: absolute;
+                        padding: 8px 16px;
+                        background-color: #b44606;
+                        color: #FFF;
+                        bottom: 16px;
+                        right: 0px;
                         text-transform: capitalize;
                     }
                 }

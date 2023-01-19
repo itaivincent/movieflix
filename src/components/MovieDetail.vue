@@ -56,7 +56,8 @@ export default{
             Date_Added: this.movie.Title,
             Category: this.movie.Title,
             User_id: this.user.Id,
-            Imdb_id: this.movie.Year
+            Imdb_id: this.movie.Year,
+            IsWatched:''
                 
             });
 

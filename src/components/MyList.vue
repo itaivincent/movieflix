@@ -4,12 +4,14 @@
                <div class="movie-link">
                 <div class="product-image">
                 <img :src="require('@/images/avengers.png')" alt="">
-                <div class="type">{{ movie.Name }}</div>
-                <button  v-on:click="watched(movie)" class="watched">Mark as watched!</button>
+                <div class="type">{{ movie.Name }}</div> 
+                <div>            
+                <button v-on:click="watched(movie)" class="watched">Mark as watched!</button>
+                </div>
                 </div>
                 <div class="detail">
                     <div class="year">{{ movie.Release_Date }}</div>
-                    <h3>{{ movie.Title }}</h3>
+                    <h3>{{ movie.IsWatched }}</h3>
                 </div>
             </div>
             </div>
@@ -46,8 +48,24 @@ export default{
     },
 
     methods:{
-    watched: function(movie){
-        console.log(movie)
+    watched: async function(movie){
+        
+        const response =  await axios.put(`Shows/${movie.Id}`,{
+        Name: movie.Name,
+        Description: movie.Name,
+        Release_Date: movie.Name,
+        Image: movie.Name,  
+        Date_Added: movie.Name,
+        Category: movie.Name,
+        User_id: this.user.Id              
+        });
+
+        if(response.status == '200'){
+            
+            this.$router.push('/mylist')
+        }
+        console.log('something went wrong!!!')
+
     }
     }
 

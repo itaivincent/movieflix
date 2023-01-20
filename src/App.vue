@@ -20,8 +20,12 @@ export default {
   },
    async created(){
 
-    // const response = await axios.get('api/all_users');
-    // this.$store.dispatch('user',response.data);
+    var headers = {
+    headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
+    }
+    var Id = localStorage.getItem('Id');
+    const response = await axios.get(`/Users/${Id}`,headers);
+    this.$store.dispatch('user',response.data);
 
     }
 

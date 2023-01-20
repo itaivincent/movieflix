@@ -5,7 +5,10 @@
                 <div class="product-image">
                 <img :src="require('@/images/avengers.png')" alt="">
                 <div class="type">{{ movie.Name }}</div> 
-                <div>            
+                <div v-if="movie.IsWatched">            
+                <button  class="watched">Watched!</button>
+                </div>
+                <div  v-else>            
                 <button v-on:click="watched(movie)" class="watched">Mark as watched!</button>
                 </div>
                 </div>
@@ -24,7 +27,7 @@
 
 export default{
     name:'MyList',
-
+ 
     computed: {
         ...mapGetters(['user']),  
     },
@@ -62,9 +65,9 @@ export default{
 
         if(response.status == '200'){
             
-            this.$router.push('/mylist')
+            this.$router.go()
         }
-        console.log('something went wrong!!!')
+      
 
     }
     }

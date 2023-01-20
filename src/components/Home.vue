@@ -38,6 +38,10 @@ import env from '@/env.js';
 
 export default{
 
+    computed: {
+        ...mapGetters(['user']),  
+    },
+    
     setup () {
         const search = ref("");
         const movies = ref([]);

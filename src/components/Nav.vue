@@ -34,17 +34,17 @@ import { mapGetters } from 'vuex';
 //we have to export component to use it as a re usable component
     export default{
 
-        name:'Nav',
-        computed:{
-            ...mapGetters(['user'])
-        },
+        name:'Nav',      
         methods:{
             handleClick(){
                 localStorage.removeItem('token');
+                localStorage.removeItem('Id');
                 this.$store.dispatch('user', null);
                 this.$router.push('/');
             },
-        }
-       
+        },
+        computed:{
+            ...mapGetters(['user'])
+        },      
     }
 </script>

@@ -37,17 +37,16 @@ import axios from 'axios'
         methods:{
 
            async handleSubmit(){
-
             try{
+                const response =  await axios.post('Users/login/',{
+                    Email: this.email,
+                    Password: this.password
+                });
 
-            const response =  await axios.post('Users/login/',{
-                Email: this.email,
-                Password: this.password
-            });
-
-            localStorage.setItem('token', response.data.Token);
-            this.$store.dispatch('user', response.data);
-            this.$router.push('/');
+                localStorage.setItem('token', response.data.Token);
+                localStorage.setItem('Id', response.data.Id);
+                this.$store.dispatch('user',response.data);
+                this.$router.push('/');
 
                } catch(e){
                 this.error = 'Invalid Email/Password!'
